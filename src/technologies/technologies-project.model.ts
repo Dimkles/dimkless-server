@@ -16,5 +16,4 @@ export class TechnologiesProject extends Model<TechnologiesProject> {
     @ForeignKey(() => Technologies)
     @Column({ type: DataType.INTEGER })
     technologiesId: number
-
 }

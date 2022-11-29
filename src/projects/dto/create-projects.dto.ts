@@ -3,5 +3,5 @@ export class CreateProjectsDto {
     readonly description: string
     readonly link: string
     readonly image: string
-    readonly technologies: [string]
+    readonly technologies: [number]
 }
