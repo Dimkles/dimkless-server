@@ -14,7 +14,7 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TechnologiesModule } from './technologies/technologies.module';
 import * as path from 'path'
-import { Technologies } from './technologies/technologies.model';
+import { Technology } from './technologies/technologies.model';
 import { Project } from './projects/projects.model';
 import { TechnologiesProject } from './technologies/technologies-project.model';
 
@@ -34,7 +34,7 @@ import { TechnologiesProject } from './technologies/technologies-project.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, Post, Technologies, Project, TechnologiesProject],
+      models: [User, Role, UserRoles, Post, Technology, Project, TechnologiesProject],
       autoLoadModels: true
     }),
     UsersModule,
