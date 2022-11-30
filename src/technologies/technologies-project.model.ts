@@ -4,7 +4,7 @@ import { Project } from "src/projects/projects.model";
 import { Technologies } from "./technologies.model";
 
 
-@Table({ tableName: 'user_roles', createdAt: false, updatedAt: false })
+@Table({ tableName: 'technologies-project', createdAt: false, updatedAt: false })
 export class TechnologiesProject extends Model<TechnologiesProject> {
     @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
     id: number

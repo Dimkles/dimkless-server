@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateTechnologiesDto } from './dto/create-technologies.dto';
 import { TechnologiesService } from './technologies.service';
 
@@ -17,7 +17,8 @@ export class TechnologiesController {
     }
 
     @Get('/:id')
-    getByValue(@Param('id') id: number) {
+    getById(@Param('id') id: number) {
         return this.technologiesService.getTechnologyById(id)
     }
+
 }
