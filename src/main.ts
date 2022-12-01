@@ -21,6 +21,6 @@ async function start() {
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe())
 
-  await app.listen(PORT, () => console.log(`Server started on pord ${PORT}`));
+  await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
 start();

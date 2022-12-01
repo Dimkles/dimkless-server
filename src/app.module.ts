@@ -17,6 +17,7 @@ import * as path from 'path'
 import { Technology } from './technologies/technologies.model';
 import { Project } from './projects/projects.model';
 import { TechnologiesProject } from './technologies/technologies-project.model';
+import { Token } from './auth/token.model';
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { TechnologiesProject } from './technologies/technologies-project.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, Post, Technology, Project, TechnologiesProject],
+      models: [User, Role, Token, UserRoles, Post, Technology, Project, TechnologiesProject],
       autoLoadModels: true
     }),
     UsersModule,
