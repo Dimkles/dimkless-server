@@ -27,7 +27,15 @@ export class AuthService {
         await this.tokenRepository.create({ refresh: token.refreshToken, userId: user.id })
         response.cookie('refreshToken', token.refreshToken)
 
-        return { token: token.accessToken }
+        return { token: token.accessToken, user }
+    }
+
+    async logout(response: Response, request: Request) {
+        const refresCookiehToken = request.cookies.refreshToken
+        const tokenFromDb = await this.tokenRepository.findOne({ where: { refresh: refresCookiehToken } })
+        tokenFromDb.destroy()
+        response.clearCookie('refreshToken')
+        return tokenFromDb
     }
 
     async registration(userDto: CreateUserDto, response: Response) {
@@ -44,7 +52,7 @@ export class AuthService {
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
         response.cookie('refreshToken', refreshToken)
 
-        return { token: accessToken }
+        return { token: accessToken, user }
     }
 
     private async generateToken(user: User) {
@@ -91,7 +99,7 @@ export class AuthService {
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
 
         response.cookie('refreshToken', refreshToken)
-        return { token: accessToken }
+        return { token: accessToken, user }
 
     }
 
