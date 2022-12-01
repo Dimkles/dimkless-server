@@ -12,7 +12,6 @@ export class AuthController {
 
     @Post('/login')
     login(@Body() userDto: CreateUserDto, @Res({ passthrough: true }) response: Response) {
-
         return this.authService.login(userDto, response)
     }
     @UseGuards(JwtAuthGuard)

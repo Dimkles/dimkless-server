@@ -16,18 +16,16 @@ export class AuthService {
 
     async login(userDto: CreateUserDto, response: Response) {
         const user = await this.validateUser(userDto)
-
-        const token = await this.generateToken(user)
+        const { refreshToken, accessToken } = await this.generateToken(user)
 
         const oldToken = await this.tokenRepository.findOne({ where: { userId: user.id } })
         if (oldToken) {
             oldToken.destroy()
         }
-
-        await this.tokenRepository.create({ refresh: token.refreshToken, userId: user.id })
-        response.cookie('refreshToken', token.refreshToken)
-
-        return { token: token.accessToken, user }
+        const userData = this.validateToken(refreshToken)
+        await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
+        response.cookie('refreshToken', refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, })
+        return { token: accessToken, user: userData }
     }
 
     async logout(response: Response, request: Request) {
@@ -51,8 +49,8 @@ export class AuthService {
         const { refreshToken, accessToken } = await this.generateToken(user)
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
         response.cookie('refreshToken', refreshToken)
-
-        return { token: accessToken, user }
+        const userData = this.validateToken(refreshToken)
+        return { token: accessToken, user: userData }
     }
 
     private async generateToken(user: User) {
