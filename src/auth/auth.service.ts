@@ -22,10 +22,9 @@ export class AuthService {
         if (oldToken) {
             oldToken.destroy()
         }
-        const userData = this.validateToken(refreshToken)
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
         response.cookie('refreshToken', refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, })
-        return { token: accessToken, user: userData }
+        return { token: accessToken, user: { id: user.id, email: user.email, roles: user.roles, banned: user.banned, banReason: user.banReason } }
     }
 
     async logout(response: Response, request: Request) {
@@ -49,8 +48,7 @@ export class AuthService {
         const { refreshToken, accessToken } = await this.generateToken(user)
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
         response.cookie('refreshToken', refreshToken)
-        const userData = this.validateToken(refreshToken)
-        return { token: accessToken, user: userData }
+        return { token: accessToken, user: { id: user.id, email: user.email, roles: user.roles, banned: user.banned, banReason: user.banReason } }
     }
 
     private async generateToken(user: User) {
@@ -95,9 +93,8 @@ export class AuthService {
         const { refreshToken, accessToken } = await this.generateToken(user)
         tokenFromDb.destroy()
         await this.tokenRepository.create({ refresh: refreshToken, userId: user.id })
-
         response.cookie('refreshToken', refreshToken)
-        return { token: accessToken, user }
+        return { token: accessToken, user: { id: user.id, email: user.email, roles: user.roles, banned: user.banned, banReason: user.banReason } }
 
     }
 
