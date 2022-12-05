@@ -18,7 +18,7 @@ async function start() {
   SwaggerModule.setup('/api/docs', app, document)
   app.enableCors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'https://dimkless.ru',
 
 
   });
