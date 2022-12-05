@@ -8,5 +8,5 @@ export class CreateProjectsDto {
     @ApiProperty({ example: 'https://dimkless.ru/band-digital/', description: 'Ссылка на проект' })
     readonly link: string
     @ApiProperty({ example: " [1,2,3,4] or '1, 2, 3, 4' ", description: 'ID технологий, в троку через запятую, либо массив цифр' })
-    readonly technologies: [number] | string
+    readonly technologies: number[] | string
 }

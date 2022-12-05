@@ -19,7 +19,9 @@ export class ProjectsService {
         return project
     }
 
-    async createProjects(dto: CreateProjectsDto, image: any) {
+    async createProjects(dto: CreateProjectsDto, image: File) {
+        console.log(dto)
+        console.log(image)
         const fileName = await this.fileService.createFile(image)
         const project = await this.projectsRepositiry.create({ ...dto, image: fileName })
         if (typeof dto.technologies === 'string') {
