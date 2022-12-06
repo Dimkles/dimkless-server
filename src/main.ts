@@ -19,8 +19,6 @@ async function start() {
   app.enableCors({
     credentials: true,
     origin: 'https://dimkless.ru',
-
-
   });
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe())
