@@ -17,6 +17,8 @@ export class ProjectsController {
 
     @ApiOperation({ summary: 'Создание проекта' })
     @ApiResponse({ status: 200, type: Project })
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
     @Post()
     @UseInterceptors(FileInterceptor('image'))
     create(@Body() dto: CreateProjectsDto, @UploadedFile() image) {

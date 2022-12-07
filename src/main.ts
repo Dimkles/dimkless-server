@@ -10,7 +10,7 @@ async function start() {
   const config = new DocumentBuilder()
     .setTitle('Backend для сайта dimkless.ru')
     .setDescription('Документация REST API')
-    .setVersion('1.0.0')
+    .setVersion('1.0.1')
     .addTag('Dimkless')
     .build()
 
