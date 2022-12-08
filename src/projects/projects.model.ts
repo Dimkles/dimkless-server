@@ -22,7 +22,7 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
     name: string
 
     @ApiProperty({ example: 'Какое-то описание', description: 'Описание проекты' })
-    @Column({ type: DataType.STRING, allowNull: false })
+    @Column({ type: DataType.TEXT, allowNull: false })
     description: string
 
     @ApiProperty({ example: 'https://dimkless.ru/band-digital/', description: 'Ссылка на проект' })
