@@ -10,7 +10,7 @@ async function start() {
   const config = new DocumentBuilder()
     .setTitle('Backend для сайта dimkless.ru')
     .setDescription('Документация REST API')
-    .setVersion('1.0.0')
+    .setVersion('1.0.1')
     .addTag('Dimkless')
     .build()
 
@@ -18,7 +18,7 @@ async function start() {
   SwaggerModule.setup('/api/docs', app, document)
   app.enableCors({
     credentials: true,
-    origin: 'https://dimkless.ru',
+    origin: process.env.ORIGIN,
   });
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe())

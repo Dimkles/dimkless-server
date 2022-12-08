@@ -10,6 +10,7 @@ import { TechnologiesService } from './technologies.service';
 @Controller('technologies')
 export class TechnologiesController {
     constructor(private technologiesService: TechnologiesService) { }
+
     @ApiOperation({ summary: 'Создание технологии' })
     @ApiResponse({ status: 200, type: Technology })
     @Roles('ADMIN')
