@@ -20,10 +20,8 @@ export class ProjectsService {
     }
 
     async createProjects(dto: CreateProjectsDto, image: File) {
-        console.log(dto)
-        console.log(image)
-        const fileName = await this.fileService.createFile(image)
-        const project = await this.projectsRepositiry.create({ ...dto, image: fileName })
+        const { imagejpg, imagewebp } = await this.fileService.createFile(image)
+        const project = await this.projectsRepositiry.create({ ...dto, imagewebp, imagejpg })
         if (typeof dto.technologies === 'string') {
             const technologies = dto.technologies.split(',')
             technologies.map(async (technology) => {
@@ -41,8 +39,10 @@ export class ProjectsService {
         console.log(id)
         const project = await this.projectsRepositiry.findByPk(id, { include: { all: true } })
         const fileName = await this.fileService.createFile(image)
-        await this.fileService.deleteFile(project.image)
-        project.image = fileName
+        await this.fileService.deleteFile(project.imagejpg)
+        await this.fileService.deleteFile(project.imagewebp)
+        project.imagejpg = fileName.imagejpg
+        project.imagewebp = fileName.imagewebp
         project.name = dto.name
         project.link = dto.link
         project.description = dto.description
@@ -64,7 +64,8 @@ export class ProjectsService {
 
     async deleteProjectById(id: number) {
         const project = await this.projectsRepositiry.findByPk(id, { include: { all: true } })
-        await this.fileService.deleteFile(project.image)
+        await this.fileService.deleteFile(project.imagejpg)
+        await this.fileService.deleteFile(project.imagewebp)
         project.destroy()
         return project
     }

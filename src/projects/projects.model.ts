@@ -8,7 +8,8 @@ interface ProjectCreationAttrs {
     name: string
     description: string
     link: string
-    image: string
+    imagejpg: string
+    imagewebp: string
 }
 
 @Table({ tableName: 'projects' })
@@ -29,11 +30,14 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
     @Column({ type: DataType.STRING, allowNull: false })
     link: string
 
-    @ApiProperty({ example: 'imageName.jpg', description: 'Название изображения на сервере' })
+    @ApiProperty({ example: 'imageName.jpg', description: 'Изображение в формате jpg' })
     @Column({ type: DataType.STRING, allowNull: false })
-    image: string
+    imagejpg: string
+
+    @ApiProperty({ example: 'imageName.webp', description: 'Изображение в формате webp' })
+    @Column({ type: DataType.STRING, allowNull: false })
+    imagewebp: string
 
     @BelongsToMany(() => Technology, () => TechnologiesProject)
     technologies: Technology[]
-
 }
