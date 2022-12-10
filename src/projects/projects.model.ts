@@ -1,8 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { TechnologiesProject } from "src/technologies/technologies-project.model";
 import { Technology } from "src/technologies/technologies.model";
-import { User } from "src/users/users.model";
 
 interface ProjectCreationAttrs {
     name: string

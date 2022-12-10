@@ -3,7 +3,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
-import { Technology } from 'src/technologies/technologies.model';
 import { CreateProjectsDto } from './dto/create-projects.dto';
 import { UpdateProjectsDto } from './dto/update-project.dto';
 import { Project } from './projects.model';
